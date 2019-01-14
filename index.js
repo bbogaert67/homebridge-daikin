@@ -112,7 +112,11 @@ Daikin.prototype = {
 	getCurrentHeatingCoolingState: function(callback) {
 		this.log("getCurrentHeatingCoolingState from:", this.apiroute+"/aircon/get_control_info");
 		request.get({
-			url: this.apiroute+"/aircon/get_control_info"
+			url: this.apiroute+"/aircon/get_control_info",
+                        headers: {
+                                "Host": this.apiroute.substring(7),
+                                "User-Agent": "Mozilla/5.0"
+                        }
 		}, function(err, response, body) {
 			if (!err && response.statusCode == 200) {
 				this.log("response success");
@@ -174,7 +178,11 @@ Daikin.prototype = {
 	getCurrentTemperature: function(callback) {
 		this.log("getCurrentTemperature from:", this.apiroute+"/aircon/get_sensor_info");
 		request.get({
-			url: this.apiroute+"/aircon/get_sensor_info"
+			url: this.apiroute+"/aircon/get_sensor_info",
+                        headers: {
+                                "Host": this.apiroute.substring(7),
+                                "User-Agent": "Mozilla/5.0"
+                        }
 		}, function(err, response, body) {
 			if (!err && response.statusCode == 200) {
 				this.log("response success");
@@ -191,12 +199,16 @@ Daikin.prototype = {
 	getTargetTemperature: function(callback) {
 		this.log("getTargetTemperature from:", this.apiroute+"/aircon/get_control_info");
 		request.get({
-			url: this.apiroute+"/aircon/get_control_info"
+			url: this.apiroute+"/aircon/get_control_info",
+                        headers: {
+                                "Host": this.apiroute.substring(7),
+                                "User-Agent": "Mozilla/5.0"
+                        }
 		}, function(err, response, body) {
 			if (!err && response.statusCode == 200) {
 				this.log("response success");
 				var json = JSON.parse(convertDaikinToJSON(body)); //{"state":"OFF","stateCode":5,"temperature":"18.10","humidity":"34.10"}
-				this.targetTemperature = parseFloat(json.stemp);
+				this.targetTemperature = Math.round(parseFloat(json.stemp));
 				this.log("Target temperature is %s", this.targetTemperature);
 				callback(null, this.targetTemperature); // success
 			} else {
@@ -207,7 +219,7 @@ Daikin.prototype = {
 	},
 	setTargetTemperature: function(value, callback) {
 		this.log("setTargetTemperature to " + value);
-		this.targetTemperature = value;
+		this.targetTemperature = Math.round(value);
 		var cBack = this.setDaikinMode();
 		callback(cBack);
 	},
@@ -228,7 +240,11 @@ Daikin.prototype = {
 	getCurrentRelativeHumidity: function(callback) {
 		this.log("getCurrentRelativeHumidity from:", this.apiroute+"/aircon/get_control_info");
 		request.get({
-					url: this.apiroute+"/aircon/get_control_info"
+			url: this.apiroute+"/aircon/get_control_info",
+                        headers: {
+                                "Host": this.apiroute.substring(7),
+                                "User-Agent": "Mozilla/5.0"
+                        }
 		}, function(err, response, body) {
 			if (!err && response.statusCode == 200) {
 				this.log("response success");
@@ -376,7 +392,11 @@ Daikin.prototype = {
 		// Finally, we send the command
 		this.log("setDaikinMode: setting pow to " + pow + ", mode to " + mode + " and stemp to " + sTemp);
 		request.get({
-			url: this.apiroute + "/aircon/set_control_info" + pow + mode + sTemp + "&shum=0"
+			url: this.apiroute + "/aircon/set_control_info" + pow + mode + sTemp + "&shum=0",
+                        headers: {
+                                "Host": this.apiroute.substring(7),
+                                "User-Agent": "Mozilla/5.0"
+                        }
 		}, function(err, response, body) {
 			if (!err && response.statusCode == 200) {
 				this.log("response success");
@@ -393,7 +413,11 @@ Daikin.prototype = {
 		// A parser for the model details will be coded here, returning the Firmware Revision, and if not set in the config
 		// file, the Name and Model as well
 		request.get({
-			url: this.apiroute+"/aircon/get_model_info"
+			url: this.apiroute+"/aircon/get_model_info",
+                        headers: {
+                                "Host": this.apiroute.substring(7),
+                                "User-Agent": "Mozilla/5.0"
+                        }
 		}, function(err, response, body) {
 			if (!err && response.statusCode == 200) {
 				this.log("response success");
@@ -411,7 +435,11 @@ Daikin.prototype = {
 		}.bind(this));
 		
 		request.get({
-			url: this.apiroute+"/common/basic_info"
+			url: this.apiroute+"/common/basic_info",
+                        headers: {
+                                "Host": this.apiroute.substring(7),
+                                "User-Agent": "Mozilla/5.0"
+                        }
 		}, function(err, response, body) {
 			if (!err && response.statusCode == 200) {
 				this.log("response success");
