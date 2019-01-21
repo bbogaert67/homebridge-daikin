@@ -2,7 +2,10 @@
 
 Supports Daikin Air Conditioners on HomeBridge
 
-Initially will be built to support talking to a Daikin BRP072A42 Wifi Adapter for a FTXS series Split System Air Conditioner, and once that's working, aim to add support for other Daikin Wifi adapters and Air Conditioners as the information becomes available
+Initially will be built to support talking to a Daikin BRP072A42 Wifi Adapter for a FTXS series Split System Air Conditioner, and once that's working, aim to add support for other Daikin Wifi adapters and Air Conditioners as the information becomes available. Tested with following combinations:
+  => BRP072A41 and FTXG Emura
+  => BRP072A42 and FVXG-K Nexura
+  => BRP069A81 and Daikin FFC-Q Split Air Conditioner
 
 # Installation
 
